@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="jiteshbaagul" translate="label" sortOrder="110">
+            <label>JiteshBaagul (Extensions)</label>
+        </tab>
+        <section id="offercountdown" translate="label" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Offer Countdown</label>
+            <tab>jiteshbaagul</tab>
+            <resource>JiteshBaagul_Offercountdown::system_config</resource>
+            <group id="general" translate="label" type="text" sortOrder="1" showInDefault="1" showInStore="1"
+                   showInWebsite="1">
+                <label>Start the Countdown to increased Sales</label>
+                 <field id="show_offercountdown" translate="label" type="select" sortOrder="3" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Display Offer Countdown</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="editor_textarea" translate="label comment" sortOrder="5" type="editor" showInStore="1" showInDefault="1" >
+                    <label>WYSIWYG Editor</label>
+                    <frontend_model>JiteshBaagul\Offercountdown\Block\System\Config\Editor</frontend_model>
+                    <depends>
+                        <field id="show_offercountdown">1</field>
+                    </depends>
+                </field>
+                <field id="enddate" translate="label" type="text" sortOrder="6" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Offer Ends From</label>
+                    <comment><![CDATA[Date Format (Date/Month/Year)]]></comment>
+                    <frontend_model>JiteshBaagul\Offercountdown\Block\System\Config\Calendar</frontend_model>
+                     <depends>
+                        <field id="show_offercountdown">1</field>
+                    </depends>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

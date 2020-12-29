@@ -1,0 +1,57 @@
+
+/* ========== offerTimer Css Start from Here =============== */
+
+#OfferCountDown-Block {
+    display: inline-block;
+    vertical-align: middle;
+    width: 100%;
+    background: #fff;
+    padding: 50px;
+    border: 1px solid #ddd;
+}
+#OfferCountDown-Block .offer-info {
+    float: left;
+    margin: 12px 0;
+}
+.offer-info .offer-msg {
+    font-size: 36px;
+    line-height: 36px;
+    color: #222;
+    text-transform: uppercase;
+    font-weight: 700;
+}
+.offer-msg p{margin: 0;}
+.offer-info span{color: #e4604a;}
+
+#OfferCountDown-Block .offer-counter { float: right; }
+#offer-counter-inner {
+    background-color: #2d2a25;
+    color: #fff;
+    padding: 8px 15px;
+    font-size: 18px;
+}
+#offer-counter-inner .special-count div {
+    display: inline-block;
+    vertical-align: middle;
+    width: 70px;
+    float: none;
+    text-align: center;
+    position: relative;
+}
+#offer-counter-inner .special-count div::after
+{
+    position: absolute;
+    content: ':';
+    top: 0;
+    right: 0;
+}
+#offer-counter-inner .special-count div:last-child:after{ content: ''; }
+#offer-counter-inner .special-count div span {
+    display: block;
+    font-size: 12px;
+    color: #777;
+    text-transform: capitalize;
+}
+#offer-counter-inner .date-recover{display: none;}
+
+/* ========== offerTimer Css End from Here =============== */

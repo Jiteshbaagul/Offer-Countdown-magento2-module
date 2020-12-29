@@ -1,0 +1,98 @@
+<?php
+
+$_helper = $this->helper('JiteshBaagul\Offercountdown\Helper\Data');
+$isEnable = $block->getScopeConfig('offercountdown/general/show_offercountdown');
+$offerMsg = $block->getScopeConfig('offercountdown/general/offerMsg');
+$enddate = $block->getScopeConfig('offercountdown/general/enddate');
+$EditorTextarea = $block->getScopeConfig('offercountdown/general/editor_textarea');
+
+//dive full date to year, month and day.. 
+$countday=substr($enddate,0,2);
+$countmonth=substr($enddate,3,2);
+$countyear=substr($enddate,6,4);
+$today =  time();
+
+
+if($isEnable == True )
+{	
+?>
+ 
+
+<div id="OfferCountDown-Block">
+	<div class="offer-info">
+		<!-- <div class="offer-msg"><?php echo $offerMsg ?></div> -->
+		<div class="offer-msg"><?php echo $EditorTextarea ?></div>
+	</div>
+	<div class="offer-counter">
+		<div id="offer-counter-inner">
+			<div class="special-count">
+                <div class="no-days time"></div>
+                <div class="no-hrs time"></div>
+                <div class="no-mins time"></div>
+                <div class="no-secs time"></div>
+            </div>
+            <div class="date-recover">
+				<span class="offerday"><?php echo $countday ?></span>
+			    <span class="offermonth"><?php echo $countmonth ?></span>
+			    <span class="offeryear"><?php echo $countyear ?></span>
+			</div>
+		</div>
+	</div>	
+</div>
+
+
+<?php
+}
+?>
+
+<script>
+    require(["jquery"], function ($) {
+
+        $(document).ready(function ($) { 
+        	$('#offer-counter-inner').each(function () {
+
+        		// Calculate EndDate in month, days, and yearly..
+        		var montharr=['Jan','Feb','Mar','Apr','May','June',"July","Aug",'Sept','Oct','Nov','Dec']
+				var year=$(this).find(".offeryear").text();
+				var month=$(this).find(".offermonth").text();
+				var day=$(this).find(".offerday").text();
+				var thisis=this;
+
+        		// Get the date we're counting down to
+		  		var countDownDate = new Date(montharr[month-1]+","+day+","+year).getTime(); 
+
+		  		// Update the count down every 1 second
+        		var JB = setInterval(function() {
+		  			
+		  			// Get todays date and time
+	    			var now = new Date().getTime();
+
+	    			// Find the distance between now and the count down date
+	    			var distance = countDownDate - now;
+
+	    			// Time calculations for days, hours, minutes and seconds
+				    var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+				    var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+				    var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+				    var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+				    // Output the result in an element with id="demo"
+    				// document.getElementById("offer-counter-inner").innerHTML = days + " <span>Days</span> " + hours + " <span>Hrs</span> " + minutes + " <span>Min</span> " + seconds + " <span>Sec</span> ";
+
+    				$(thisis).closest("#offer-counter-inner").find(".special-count .no-days").html(days + "<span>days</span>");
+		  			$(thisis).closest("#offer-counter-inner").find(".special-count .no-hrs").html(hours + "<span>hrs</span>");
+		  			$(thisis).closest("#offer-counter-inner").find(".special-count .no-mins").html(minutes + "<span>mins</span>");
+		  			$(thisis).closest("#offer-counter-inner").find(".special-count .no-secs").html(seconds + "<span>secs</span>");
+
+		  			// If the count down is over
+					if (distance < 0) {
+				        clearInterval(JB);
+				        document.getElementById("offer-counter-inner").innerHTML = "This Deal has ended..!</br>Please visit again for new deal";
+				    }
+
+	  			}, 1000);
+  			});
+        });
+    });
+
+</script>
